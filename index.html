@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Max Sloam | Portfolio</title>
+  <meta name="description" content="Portfolio of Max Sloam, Computer Science student interested in AI and full-stack software engineering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="#home" class="logo">Max Sloam</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact" class="btn btn-small">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero container">
+      <div class="hero-text">
+        <p class="eyebrow">Computer Science Student</p>
+        <h1>Hi, I’m Max Sloam.</h1>
+        <p class="lead">
+          I’m a Computer Science student interested in artificial intelligence and full-stack software engineering,
+          with experience building robust technical solutions and working effectively in teams.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn">View Projects</a>
+          <a href="mailto:Maxsloam.work@gmail.com" class="btn btn-secondary">Email Me</a>
+        </div>
+        <ul class="quick-info">
+          <li>London / Nottingham, UK</li>
+          <li>maxsloam.work@gmail.com</li>
+          <li>Student</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <h2>About Me</h2>
+      <div class="card">
+        <p>
+          I am a diligent and hard-working second-year Computer Science student with a strong attention to detail
+          and a consistent high standard of work. I learn new concepts quickly and enjoy finding efficient solutions
+          to complex problems.
+        </p>
+        <p>
+          My main interests are artificial intelligence and full-stack software engineering. I am looking to keep
+          developing practical industry experience while continuing to build strong technical and collaborative skills.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" class="section container">
+      <h2>Technical Skills</h2>
+      <div class="grid skills-grid">
+        <div class="card">
+          <h3>Languages</h3>
+          <p>Python, Java, C++, JavaScript</p>
+        </div>
+        <div class="card">
+          <h3>Frontend</h3>
+          <p>HTML, CSS, JavaScript, React</p>
+        </div>
+        <div class="card">
+          <h3>Backend / DB</h3>
+          <p>Supabase, SQLite</p>
+        </div>
+        <div class="card">
+          <h3>ML / AI</h3>
+          <p>scikit-learn, NLP/tokenization, chatbot integration, Rasa, Flask</p>
+        </div>
+        <div class="card">
+          <h3>Tools</h3>
+          <p>Git, Linux, testing frameworks, JUnit</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section container">
+      <h2>Projects</h2>
+      <div class="grid project-grid">
+        <article class="card project-card">
+          <h3>AI Ticket Tokenisation</h3>
+          <p class="project-tech">Python, scikit-learn, NLP, Rasa, Flask</p>
+          <p>
+            Group project focused on automating routine service desk tasks while identifying higher-priority issues
+            requiring human support.
+          </p>
+          <p>
+            I developed the backend for a service desk automation project, building a Rasa chatbot that could process
+            user requests and support ticket creation and prioritization.
+          </p>
+        </article>
+
+        <article class="card project-card">
+          <h3>Cyborg Platform Game</h3>
+          <p class="project-tech">Java, JavaFX, MVC, JUnit</p>
+          <p>
+            Refactored the UI layer from Swing to JavaFX and introduced MVC separation to improve maintainability.
+          </p>
+          <p>
+            Added unit tests and documented modules to improve code quality and project structure.
+          </p>
+        </article>
+
+        <article class="card project-card">
+          <h3>Car Retailer Web App</h3>
+          <p class="project-tech">HTML, CSS, JavaScript, Supabase</p>
+          <p>
+            Built a responsive web app with Supabase-backed data and API integration for browsing and filtering cars
+            and supporting user actions.
+          </p>
+          <p>
+            Tested cross-browser compatibility using Lighthouse and Playwright.
+          </p>
+        </article>
+
+        <article class="card project-card">
+          <h3>Operating System Simulator</h3>
+          <p class="project-tech">C++</p>
+          <p>
+            Built a program that simulates an operating system, managing processes and threads along with priority
+            boosting using a round-robin algorithm.
+          </p>
+        </article>
+
+        <article class="card project-card">
+          <h3>Tower Defence Game</h3>
+          <p class="project-tech">C++, SDL2</p>
+          <p>
+            Built enemy pathing and a wave system including spawners, scaling difficulty, and win/lose states using
+            clean state management.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section container">
+      <h2>Work Experience</h2>
+      <div class="timeline">
+        <div class="card timeline-item">
+          <h3>Sales Assistant / Administrator — Winkworth Estate Agency</h3>
+          <p class="muted">March 2022 – September 2025</p>
+          <p>
+            Provided a high level of customer service and helped support the smooth running of the office.
+            Managed property keys, ensuring safe handling, accurate logging, and reliable communication.
+          </p>
+        </div>
+
+        <div class="card timeline-item">
+          <h3>IT Support Work Placement — Storm IT</h3>
+          <p class="muted">July 2023 – August 2023</p>
+          <p>
+            Completed cybersecurity-related tasks and gained a stronger understanding of how websites and digital systems
+            support modern businesses.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section container">
+      <h2>Education</h2>
+      <div class="grid two-col">
+        <div class="card">
+          <h3>University of Nottingham</h3>
+          <p class="muted">September 2024 – Present</p>
+          <p>Computer Science BSc (Hons)</p>
+        </div>
+        <div class="card">
+          <h3>Yavneh College</h3>
+          <p class="muted">Completed June 2024</p>
+          <p>A-Levels: Computer Science, Mathematics, Economics</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="volunteering" class="section container">
+      <h2>Volunteering</h2>
+      <div class="card">
+        <h3>Mentoring — Yavneh College</h3>
+        <p class="muted">September 2022 – April 2024</p>
+        <p>
+          Mentored two younger students and helped them work through issues involving anxiety and bullying.
+          This experience strengthened my communication, empathy, and problem-solving skills.
+        </p>
+      </div>
+    </section>
+
+    <section id="interests" class="section container">
+      <h2>Other Interests</h2>
+      <div class="card">
+        <h3>Piano</h3>
+        <p>
+          I am a self-taught pianist and enjoy learning challenging classical pieces, creating music, and developing
+          creativity through consistent practice and dedication.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <div class="card contact-card">
+        <p>If you’d like to get in touch about opportunities, projects, or collaborations, feel free to contact me.</p>
+        <div class="contact-links">
+          <a class="btn" href="mailto:Maxsloam.work@gmail.com">Email</a>
+          <a class="btn btn-secondary" href="https://github.com/MaxS140M" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Max Sloam. Built with HTML, CSS, and JavaScript.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
