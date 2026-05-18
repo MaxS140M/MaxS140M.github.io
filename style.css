@@ -56,6 +56,16 @@ a {
   gap: 1rem;
 }
 
+.project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .logo {
   font-weight: 800;
   letter-spacing: 0.3px;
