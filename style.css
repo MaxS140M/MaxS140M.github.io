@@ -30,8 +30,16 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: purple;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: darkviolet;
+}
+
+a:visited {
+  color: blueviolet;
 }
 
 .container {
