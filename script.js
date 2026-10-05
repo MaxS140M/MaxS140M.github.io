@@ -9,10 +9,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-function copyEmail() {
+function copyEmail(button) {
   const email = "Maxsloam.work@gmail.com";
   navigator.clipboard.writeText(email).then(() => {
-    const button = event.target;
     const originalText = button.textContent;
     button.textContent = "Copied!";
     setTimeout(() => {

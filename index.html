@@ -31,12 +31,12 @@
         <p class="eyebrow">Computer Science Student</p>
         <h1>Hi, I’m Max Sloam.</h1>
         <p class="lead">
-          I’m a Computer Science student interested in artificial intelligence and full-stack software engineering,
+          I’m a Computer Science student interested in artificial intelligence and Machine Learning,
           with experience building robust technical solutions and working effectively in teams.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn">View Projects</a>
-          <button onclick="copyEmail()" class="btn btn-secondary">Email Me</button>
+          <button onclick="copyEmail(this)" class="btn btn-secondary">Email Me</button>
         </div>
         <ul class="quick-info">
           <li>London / Nottingham, UK</li>
@@ -50,7 +50,7 @@
       <h2>About Me</h2>
       <div class="card">
         <p>
-          I am a diligent and hard-working second-year Computer Science student with a strong attention to detail
+          I am a diligent 3rd-year Computer Science student @ the University Of Nottingham. With a strong attention to detail
           and a consistent high standard of work. I learn new concepts quickly and enjoy finding efficient solutions
           to complex problems.
         </p>
@@ -90,10 +90,25 @@
     <section id="projects" class="section container">
       <h2>Projects</h2>
       <div class="grid project-grid">
+
+        <!-- UK rag -->
+         <article class="card project-card">
+           <img src="images/demo.gif" alt="gif of project" class="project-image" />
+          <h3>UK rag</h3>
+          <p class="project-tech">Python, pytest, FAISS, Rabj-bm25, Anthropic Claude API</p>
+          <p>
+            A question-answering assistant for renting in England that answers only from official GOV.UK guidance, cites its sources, and says so when the guidance does not cover a question.
+          </p>
+          <p>
+            GitHub Link: <a href="https://github.com/MaxS140M/UK-renting-rag" rel="noreferrer">UK rag</a>
+          </p>
+        </article>
+
+        <!-- AI Ticket Tokenisation Project -->
         <article class="card project-card">
           <h3>AI Ticket Tokenisation</h3>
            <img src="images/NUH1.png" alt="Screenshot of AI Ticket Tokenisation project" class="project-image" />
-            <img src="images/NUH2.png" alt="Screenshot of AI Ticket Tokenisation project" class="project-image" />
+            <img src="images/NUH2.png" alt="Screenshot of AI Ticket Tokenisation project2" class="project-image" />
           <p class="project-tech">Python, scikit-learn, NLP, Rasa, Flask</p>
           <p>
             Group project focused on automating routine service desk tasks while identifying higher-priority issues
@@ -108,6 +123,8 @@
           </p>
         </article>
 
+
+        <!-- Cyborg Platform Game Project -->
         <article class="card project-card">
           <h3>Cyborg Platform Game</h3>
            <img src="images/CyborgPlatfrom.png" alt="Screenshot of Cyborg Platform Game project" class="project-image" />
@@ -121,6 +138,7 @@
     
         </article>
 
+        <!-- Car Retailer Web App Project -->
         <article class="card project-card">
           <h3>Car Retailer Web App</h3>
           <p class="project-tech">HTML, CSS, JavaScript, Supabase</p>
@@ -133,6 +151,7 @@
           </p>
         </article>
 
+        <!-- Operating System Simulator Project -->
         <article class="card project-card">
           <h3>Operating System Simulator</h3>
           <p class="project-tech">C++</p>
@@ -145,6 +164,7 @@
           </p>
         </article>
 
+        <!-- Tower Defence Game Project -->
         <article class="card project-card">
            <img src="images/TowerDefence.png" alt="Screenshot of Tower Defence Game project" class="project-image" />
           <h3>Tower Defence Game</h3>
@@ -159,6 +179,7 @@
           </p>
         </article>
 
+        <!-- Gym Social Web UI Project -->
          <article class="card project-card">
            <img src="images/GymSocail.png" alt="Screenshot of Gym Social Web UI project" class="project-image" />
           <h3>Gym Social Web UI</h3>
@@ -170,14 +191,7 @@
           </p>
         </article>
 
-         <article class="card project-card">
-           <img src="images/Placeholder.png" alt="Screenshot of Future Project" class="project-image" />
-          <h3>Future Project</h3>
-          <p class="project-tech">tech stack</p>
-          <p>
-            Explanation
-          </p>
-        </article>
+
 
         
       </div>
