@@ -4,21 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Max Sloam | Portfolio</title>
-  <meta name="description" content="Portfolio of Max Sloam, Computer Science student interested in AI and full-stack software engineering." />
+  <meta name="description" content="Portfolio of Max Sloam, Computer Science student at the University of Nottingham interested in AI and full-stack software engineering." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Max Sloam | Portfolio" />
+  <meta property="og:description" content="Computer Science student at the University of Nottingham building AI and full-stack projects." />
+  <meta property="og:url" content="https://maxs140m.github.io/" />
+  <meta property="og:image" content="https://maxs140m.github.io/images/NUH1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c9cff'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%230b1020'%3EMS%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
   <header class="header">
     <nav class="nav container">
       <a href="#home" class="logo">Max Sloam</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#contact" class="btn btn-small">Contact</a>
       </div>
@@ -28,179 +40,181 @@
   <main id="home">
     <section class="hero container">
       <div class="hero-text">
-        <p class="eyebrow">Computer Science Student</p>
+        <p class="eyebrow">Computer Science Student · University of Nottingham</p>
         <h1>Hi, I’m Max Sloam.</h1>
         <p class="lead">
-          I’m a Computer Science student interested in artificial intelligence and Machine Learning,
-          with experience building robust technical solutions and working effectively in teams.
+          I build practical software with a focus on artificial intelligence and machine learning, from
+          retrieval-augmented assistants to full-stack web apps and games.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn">View Projects</a>
-          <button onclick="copyEmail(this)" class="btn btn-secondary">Email Me</button>
+          <button type="button" onclick="copyEmail(this)" class="btn btn-secondary">Copy Email</button>
+          <a href="https://github.com/MaxS140M" class="btn btn-secondary" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
         <ul class="quick-info">
-          <li>London / Nottingham, UK</li>
-          <li>maxsloam.work@gmail.com</li>
-          <li>Student</li>
+          <li>📍 London / Nottingham, UK</li>
+          <li>✉️ <a href="mailto:maxsloam.work@gmail.com">maxsloam.work@gmail.com</a></li>
         </ul>
-      </div>
-    </section>
-
-    <section id="about" class="section container">
-      <h2>About Me</h2>
-      <div class="card">
-        <p>
-          I am a diligent 3rd-year Computer Science student @ the University Of Nottingham. With a strong attention to detail
-          and a consistent high standard of work. I learn new concepts quickly and enjoy finding efficient solutions
-          to complex problems.
-        </p>
-        <p>
-          My main interests are artificial intelligence and full-stack software engineering. I am looking to keep
-          developing practical industry experience while continuing to build strong technical and collaborative skills.
-        </p>
-      </div>
-    </section>
-
-    <section id="skills" class="section container">
-      <h2>Technical Skills</h2>
-      <div class="grid skills-grid">
-        <div class="card">
-          <h3>Languages</h3>
-          <p>Python, Java, C++, JavaScript</p>
-        </div>
-        <div class="card">
-          <h3>Frontend</h3>
-          <p>HTML, CSS, JavaScript, React</p>
-        </div>
-        <div class="card">
-          <h3>Backend / DB</h3>
-          <p>Supabase, SQLite</p>
-        </div>
-        <div class="card">
-          <h3>ML / AI</h3>
-          <p>scikit-learn, NLP/tokenization, chatbot integration, Rasa, Flask</p>
-        </div>
-        <div class="card">
-          <h3>Tools</h3>
-          <p>Git, Linux, testing frameworks, JUnit</p>
-        </div>
       </div>
     </section>
 
     <section id="projects" class="section container">
       <h2>Projects</h2>
+      <p class="section-intro">A selection of things I’ve built, starting with my AI work.</p>
+
+      <div class="featured-list">
+        <!-- UK Renting RAG -->
+        <article class="card project-card featured reveal">
+          <div class="project-media">
+            <img src="images/demo.gif" alt="Demo of the UK Renting Guidance Assistant answering a question" class="project-image" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <p class="project-label">Featured · AI</p>
+            <h3>UK Renting Guidance Assistant (RAG)</h3>
+            <p>
+              A question-answering assistant for renting in England that answers only from official GOV.UK guidance,
+              cites its sources, and says so when the guidance doesn’t cover a question.
+            </p>
+            <ul class="tags">
+              <li>Python</li><li>FAISS</li><li>rank-bm25</li><li>Claude API</li><li>pytest</li>
+            </ul>
+            <div class="card-links">
+              <a class="btn btn-small" href="https://github.com/MaxS140M/UK-renting-rag" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- AI Ticket Tokenisation -->
+        <article class="card project-card featured reveal">
+          <div class="project-media">
+            <img src="images/NUH1.png" alt="Rasa chatbot classifying a service desk ticket" class="project-image" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <p class="project-label">Featured · AI · Group project</p>
+            <h3>AI Ticket Tokenisation</h3>
+            <p>
+              Automates routine service desk requests while flagging higher-priority issues for human support.
+            </p>
+            <p>
+              I built the backend: a Rasa chatbot that processes user requests and handles ticket creation and prioritisation.
+            </p>
+            <ul class="tags">
+              <li>Python</li><li>scikit-learn</li><li>NLP</li><li>Rasa</li><li>Flask</li>
+            </ul>
+            <div class="card-links">
+              <a class="btn btn-small" href="https://github.com/MaxS140M/NUH-Ticket-Awakens" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="subheading">More projects</h3>
       <div class="grid project-grid">
 
-        <!-- UK rag -->
-         <article class="card project-card">
-           <img src="images/demo.gif" alt="gif of project" class="project-image" />
-          <h3>UK rag</h3>
-          <p class="project-tech">Python, pytest, FAISS, Rabj-bm25, Anthropic Claude API</p>
+        <!-- Wine Quality Prediction -->
+        <article class="card project-card reveal">
+          <div class="project-media">
+            <img src="images/WinePredict.png" alt="Regression metrics for the wine quality model" class="project-image" loading="lazy" />
+          </div>
+          <h3>Wine Quality Prediction</h3>
           <p>
-            A question-answering assistant for renting in England that answers only from official GOV.UK guidance, cites its sources, and says so when the guidance does not cover a question.
+            Regression model predicting wine quality, with feature-importance analysis comparing MSE, MAE and R² before
+            and after removing features.
           </p>
-          <p>
-            GitHub Link: <a href="https://github.com/MaxS140M/UK-renting-rag" rel="noreferrer">UK rag</a>
-          </p>
+          <ul class="tags">
+            <li>Python</li><li>scikit-learn</li><li>Jupyter</li>
+          </ul>
         </article>
 
-        <!-- AI Ticket Tokenisation Project -->
-        <article class="card project-card">
-          <h3>AI Ticket Tokenisation</h3>
-           <img src="images/NUH1.png" alt="Screenshot of AI Ticket Tokenisation project" class="project-image" />
-            <img src="images/NUH2.png" alt="Screenshot of AI Ticket Tokenisation project2" class="project-image" />
-          <p class="project-tech">Python, scikit-learn, NLP, Rasa, Flask</p>
-          <p>
-            Group project focused on automating routine service desk tasks while identifying higher-priority issues
-            requiring human support.
-          </p>
-          <p>
-            I developed the backend for a service desk automation project, building a Rasa chatbot that could process
-            user requests and support ticket creation and prioritization.
-          </p>
-          <p>
-            GitHub Link: <a href="https://github.com/MaxS140M/NUH-Ticket-Awakens" rel="noreferrer">AI Ticket Tokenisation</a>
-          </p>
-        </article>
-
-
-        <!-- Cyborg Platform Game Project -->
-        <article class="card project-card">
-          <h3>Cyborg Platform Game</h3>
-           <img src="images/CyborgPlatfrom.png" alt="Screenshot of Cyborg Platform Game project" class="project-image" />
-          <p class="project-tech">Java, JavaFX, MVC, JUnit</p>
-          <p>
-            Module Coursework: Refactored the UI layer from Swing to JavaFX and introduced MVC separation to improve maintainability.
-          </p>
-          <p>
-            Added unit tests and documented modules to improve code quality and project structure.
-          </p>
-    
-        </article>
-
-        <!-- Car Retailer Web App Project -->
-        <article class="card project-card">
-          <h3>Car Retailer Web App</h3>
-          <p class="project-tech">HTML, CSS, JavaScript, Supabase</p>
-          <p>
-            Built a responsive web app with Supabase-backed data and API integration for browsing and filtering cars
-            and supporting user actions.
-          </p>
-          <p>
-            Tested cross-browser compatibility using Lighthouse and Playwright.
-          </p>
-        </article>
-
-        <!-- Operating System Simulator Project -->
-        <article class="card project-card">
-          <h3>Operating System Simulator</h3>
-          <p class="project-tech">C++</p>
-          <p>
-            Module Coursework: Built a program that simulates an operating system, managing processes and threads along with priority
-            boosting using a round-robin algorithm.
-          </p>
-          <p>
-            GitHub Link: <a href="https://github.com/MaxS140M/Operating-System-Simulator" rel="noreferrer">Operating System Simulator</a>
-          </p>
-        </article>
-
-        <!-- Tower Defence Game Project -->
-        <article class="card project-card">
-           <img src="images/TowerDefence.png" alt="Screenshot of Tower Defence Game project" class="project-image" />
+        <!-- Tower Defence Game -->
+        <article class="card project-card reveal">
+          <div class="project-media">
+            <img src="images/TowerDefence.png" alt="Tower Defence game showing towers along an enemy path" class="project-image" loading="lazy" />
+          </div>
           <h3>Tower Defence Game</h3>
-          <p class="project-tech">C++, SDL2</p>
           <p>
-            Built enemy pathing and a wave system including spawners, scaling difficulty, and win/lose states using
-            clean state management.
+            Enemy pathing and a wave system with spawners, scaling difficulty and win/lose states, built on clean state management.
           </p>
-
-          <p>
-            GitHub Link: <a href="https://github.com/MaxS140M/Tower_Defence" rel="noreferrer">Tower Defence Game</a>
-          </p>
+          <ul class="tags">
+            <li>C++</li><li>SDL2</li>
+          </ul>
+          <div class="card-links">
+            <a class="btn btn-small btn-secondary" href="https://github.com/MaxS140M/Tower_Defence" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
         </article>
 
-        <!-- Gym Social Web UI Project -->
-         <article class="card project-card">
-           <img src="images/GymSocail.png" alt="Screenshot of Gym Social Web UI project" class="project-image" />
+        <!-- Cyborg Platform Game -->
+        <article class="card project-card reveal">
+          <div class="project-media">
+            <img src="images/CyborgPlatfrom.png" alt="Cyborg platform game level" class="project-image" loading="lazy" />
+          </div>
+          <h3>Cyborg Platform Game</h3>
+          <p>
+            Refactored the UI layer from Swing to JavaFX with MVC separation, then added unit tests and documentation
+            to improve maintainability.
+          </p>
+          <ul class="tags">
+            <li>Java</li><li>JavaFX</li><li>MVC</li><li>JUnit</li>
+          </ul>
+        </article>
+
+        <!-- Gym Social Web UI -->
+        <article class="card project-card reveal">
+          <div class="project-media">
+            <img src="images/GymSocail.png" alt="Gym Social web interface" class="project-image" loading="lazy" />
+          </div>
           <h3>Gym Social Web UI</h3>
-          <p class="project-tech">HTML, CSS, JavaScript</p>
           <p>
-            Built a working front-end for a social media platform for gym-goers,
-             including a responsive design and interactive features.
-            <br />GitHub Link: <a href="https://github.com/MaxS140M/Gym_Online" rel="noreferrer">Gym Social Web UI</a>
+            A working, responsive front-end for a social media platform for gym-goers, with interactive features.
           </p>
+          <ul class="tags">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+          <div class="card-links">
+            <a class="btn btn-small btn-secondary" href="https://github.com/MaxS140M/Gym_Online" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
         </article>
 
+        <!-- Car Retailer Web App -->
+        <article class="card project-card reveal">
+          <div class="project-media project-cover cover-web" aria-hidden="true">
+            <span>&lt;car-retailer /&gt;</span>
+          </div>
+          <h3>Car Retailer Web App</h3>
+          <p>
+            Responsive web app backed by Supabase for browsing and filtering cars, with cross-browser testing using
+            Lighthouse and Playwright.
+          </p>
+          <ul class="tags">
+            <li>JavaScript</li><li>Supabase</li><li>Playwright</li>
+          </ul>
+        </article>
 
+        <!-- Operating System Simulator -->
+        <article class="card project-card reveal">
+          <div class="project-media project-cover cover-os" aria-hidden="true">
+            <span>$ ./os-sim --round-robin</span>
+          </div>
+          <h3>Operating System Simulator</h3>
+          <p>
+            Simulates an operating system’s scheduler, managing processes and threads with round-robin scheduling
+            and priority boosting.
+          </p>
+          <ul class="tags">
+            <li>C++</li>
+          </ul>
+          <div class="card-links">
+            <a class="btn btn-small btn-secondary" href="https://github.com/MaxS140M/Operating-System-Simulator" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
+        </article>
 
-        
       </div>
     </section>
 
     <section id="experience" class="section container">
       <h2>Work Experience</h2>
       <div class="timeline">
-        <div class="card timeline-item">
+        <div class="card timeline-item reveal">
           <h3>Sales Assistant / Administrator — Winkworth Estate Agency</h3>
           <p class="muted">March 2022 – September 2025</p>
           <p>
@@ -209,7 +223,7 @@
           </p>
         </div>
 
-        <div class="card timeline-item">
+        <div class="card timeline-item reveal">
           <h3>IT Support Work Placement — Storm IT</h3>
           <p class="muted">July 2023 – August 2023</p>
           <p>
@@ -220,15 +234,37 @@
       </div>
     </section>
 
+    <section id="skills" class="section container">
+      <h2>Technical Skills</h2>
+      <div class="grid skills-grid">
+        <div class="card skill-card reveal">
+          <h3>Languages</h3>
+          <ul class="tags"><li>Python</li><li>Java</li><li>C++</li><li>JavaScript</li></ul>
+        </div>
+        <div class="card skill-card reveal">
+          <h3>ML / AI</h3>
+          <ul class="tags"><li>scikit-learn</li><li>NLP / tokenisation</li><li>RAG</li><li>Rasa</li><li>Flask</li></ul>
+        </div>
+        <div class="card skill-card reveal">
+          <h3>Web</h3>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Supabase</li><li>SQLite</li></ul>
+        </div>
+        <div class="card skill-card reveal">
+          <h3>Tools</h3>
+          <ul class="tags"><li>Git</li><li>Linux</li><li>JUnit</li><li>pytest</li><li>Playwright</li></ul>
+        </div>
+      </div>
+    </section>
+
     <section id="education" class="section container">
       <h2>Education</h2>
       <div class="grid two-col">
-        <div class="card">
+        <div class="card reveal">
           <h3>University of Nottingham</h3>
           <p class="muted">September 2024 – Present</p>
           <p>Computer Science BSc (Hons)</p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <h3>Yavneh College</h3>
           <p class="muted">Completed June 2024</p>
           <p>A-Levels: Computer Science, Mathematics, Economics</p>
@@ -236,36 +272,35 @@
       </div>
     </section>
 
-    <section id="volunteering" class="section container">
-      <h2>Volunteering</h2>
-      <div class="card">
-        <h3>Mentoring — Yavneh College</h3>
-        <p class="muted">September 2022 – April 2024</p>
-        <p>
-          Mentored two younger students and helped them work through issues involving anxiety and bullying.
-          This experience strengthened my communication, empathy, and problem-solving skills.
-        </p>
-      </div>
-    </section>
-
-    <section id="interests" class="section container">
-      <h2>Other Interests</h2>
-      <div class="card">
-        <h3>Piano</h3>
-        <p>
-          I am a self-taught pianist and enjoy learning challenging classical pieces, creating music, and developing
-          creativity through consistent practice and dedication.
-        </p>
+    <section id="about" class="section container">
+      <h2>Beyond the Code</h2>
+      <div class="grid two-col">
+        <div class="card reveal">
+          <h3>Mentoring — Yavneh College</h3>
+          <p class="muted">September 2022 – April 2024</p>
+          <p>
+            Mentored two younger students through issues involving anxiety and bullying, strengthening my
+            communication, empathy and problem-solving skills.
+          </p>
+        </div>
+        <div class="card reveal">
+          <h3>Piano</h3>
+          <p class="muted">Self-taught</p>
+          <p>
+            I enjoy learning challenging classical pieces and creating my own music, building creativity through
+            consistent practice.
+          </p>
+        </div>
       </div>
     </section>
 
     <section id="contact" class="section container">
-      <h2>Contact</h2>
-      <div class="card contact-card">
-        <p>If you’d like to get in touch about opportunities, projects, or collaborations, feel free to contact me.</p>
+      <div class="card contact-card reveal">
+        <h2>Get in touch</h2>
+        <p>If you’d like to talk about opportunities, projects or collaborations, I’d love to hear from you.</p>
         <div class="contact-links">
-          <a class="btn" href="mailto:Maxsloam.work@gmail.com">Email</a>
-          <a class="btn btn-secondary" href="https://github.com/MaxS140M" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="mailto:maxsloam.work@gmail.com">Email Me</a>
+          <a class="btn btn-secondary" href="https://github.com/MaxS140M" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
       </div>
     </section>
