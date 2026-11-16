@@ -95,6 +95,86 @@ const PROJECTS = [
   },
 
   {
+    slug: "futures-trend",
+    title: "Systematic Futures Trading System",
+    label: "Python · Quant research",
+    featured: true,
+    summary:
+      "A trend-following system trading 22 futures markets across six asset classes, with positions sized by risk and every trading cost modelled, backtested from 2000 to 2024.",
+    metrics: [
+      { value: "0.64", label: "Sharpe after costs, vs 0.32 for the S&P 500" },
+      { value: "−40%", label: "worst drawdown, vs −77% for the S&P 500" },
+      { value: "+50%", label: "in 2008, when stocks fell 41%" },
+      { value: "48", label: "tests, incl. look-ahead checks" },
+    ],
+    sections: [
+      {
+        heading: "The question",
+        body:
+          "<p>Can a simple rule — buy what has been rising, sell what has been falling — make money across stocks, bonds, currencies and commodities once realistic trading costs are paid? And can I show the result is real rather than the product of tuning the rules until the past looked good?</p>",
+      },
+      {
+        heading: "What I built",
+        body:
+          "<p>Four moving-average crossovers of different speeds combine into a forecast from −20 to +20 for each market. Each position is sized by risk rather than contract count: forecast × capital × a 20% risk target ÷ the yearly dollar risk of one contract. A volatile market like crude oil therefore gets fewer contracts than a calm one like the euro, and every market holds fewer when it turns wild.</p>" +
+          "<p>Risk is split equally across six sectors, and commission, bid-ask spread and contract rolls are all charged. Each piece was built and tested before the next one started, and every stage has a test that changes future prices and checks past results don't move.</p>",
+      },
+      {
+        heading: "What I found",
+        body:
+          "<p>From 2000 to 2021 it reached a Sharpe ratio of 0.64 after costs, made money in the 2000–02 and 2008 crashes, and had a slightly negative correlation with stocks. Changing one setting at a time kept the Sharpe between 0.49 and 0.68. On 2021–24, held back until the very end and run once, it fell to <strong>0.30</strong>: weaker, but still positive.</p>" +
+          "<p>Two lessons stood out. Trading costs first came out at 2.5% a year; breaking them down by market led to a weighting bug triggered by market holidays, and fixing it brought costs to 1.0%. And account size matters: with $100k most markets need less than one contract, so only about 7 of 22 can be held.</p>",
+      },
+    ],
+    architecture: [
+      [{ name: "Price data", note: "22 markets, back-adjusted" }],
+      [{ name: "Trend signal", note: "4 speeds", kind: "py" }],
+      [{ name: "Position sizing", note: "by risk", kind: "py" }],
+      [{ name: "Costs", note: "commission, spread, rolls", kind: "py" }],
+      [{ name: "Portfolio", note: "6 sectors", kind: "py" }],
+      [{ name: "Report", kind: "py" }, { name: "Honesty checks", kind: "py" }],
+    ],
+    tags: ["Python", "pandas", "NumPy", "Matplotlib", "pytest", "Jupyter"],
+    media: [
+      {
+        src: "images/FuturesResults.png",
+        alt: "Cumulative profit of the trend system against always-long and the S&P 500, 2000 to 2021",
+        caption: "Profit after costs. The $1m trend portfolio against simply owning the same markets and the S&P 500.",
+        fit: "contain",
+        bg: "#fcfcfb",
+      },
+      {
+        src: "images/FuturesSignal.png",
+        alt: "Crude oil price with fast and slow moving averages and the resulting buy and sell forecast, 2014 to 2016",
+        caption: "When oil's fast average fell below its slow one, the system went short and stayed short through most of the crash.",
+        fit: "contain",
+        bg: "#fcfcfb",
+      },
+      {
+        src: "images/FuturesSensitivity.png",
+        alt: "Sharpe ratio across twelve variations of the system",
+        caption: "Changing one thing at a time keeps the Sharpe ratio between 0.49 and 0.68.",
+        fit: "contain",
+        bg: "#fcfcfb",
+      },
+      {
+        src: "images/FuturesHoldout.png",
+        alt: "Cumulative profit over the held-back 2021 to 2024 period",
+        caption: "Three years kept untouched and run once at the end: a strong 2022 and a weak 2023.",
+        fit: "contain",
+        bg: "#fcfcfb",
+      },
+    ],
+    repo: "MaxS140M/Systematic_futures_portfolio",
+    links: [
+      {
+        text: "Walkthrough notebook",
+        href: "https://github.com/MaxS140M/Systematic_futures_portfolio/blob/main/notebooks/walkthrough.ipynb",
+      },
+    ],
+  },
+
+  {
     slug: "uk-renting-rag",
     title: "UK Renting Guidance Assistant",
     label: "AI · RAG",
