@@ -70,7 +70,7 @@ document.querySelectorAll("[data-copy-email]").forEach(button => {
 function mediaHtml(project, className) {
   const first = project.media && project.media[0];
   if (!first) {
-    return `<div class="${className} project-cover" aria-hidden="true"><span>${escapeHtml(project.cover || project.title)}</span></div>`;
+    return `<div class="${className} project-cover" aria-hidden="true"><span>${escapeHtml(project.title)}</span></div>`;
   }
   const contain = first.fit === "contain";
   const style = first.bg ? ` style="background:${first.bg}"` : "";
@@ -80,25 +80,24 @@ function mediaHtml(project, className) {
 }
 
 function cardHtml(project) {
-  const label = project.featured ? `Featured · ${project.label}` : project.label;
   const metrics = project.featured && project.metrics
     ? `<ul class="card-metrics">${project.metrics.slice(0, 3).map(m =>
-        `<li><strong>${escapeHtml(m.value)}</strong> ${escapeHtml(m.label)}</li>`).join("")}</ul>`
+        `<li><strong>${escapeHtml(m.value)}</strong><span>${escapeHtml(m.label)}</span></li>`).join("")}</ul>`
     : "";
-  const github = project.repo
-    ? `<a class="btn btn-small btn-secondary" href="https://github.com/${project.repo}" target="_blank" rel="noreferrer">GitHub ↗</a>`
+  const github = project.featured && project.repo
+    ? `<a class="card-github" href="https://github.com/${project.repo}" target="_blank" rel="noreferrer">GitHub ↗</a>`
     : "";
 
   return `<article class="card project-card${project.featured ? " featured" : ""} reveal" data-slug="${project.slug}">
       ${mediaHtml(project, "project-media")}
       <div class="project-body">
-        <p class="project-label">${escapeHtml(label)}</p>
+        <p class="project-label">${escapeHtml(project.label)}</p>
         <h3><a class="project-open" href="#/${project.slug}">${escapeHtml(project.title)}</a></h3>
         <p>${escapeHtml(project.summary)}</p>
         ${metrics}
-        <ul class="tags">${project.tags.slice(0, 5).map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+        <ul class="tags">${project.tags.slice(0, project.featured ? 5 : 3).map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
         <div class="card-links">
-          <span class="card-open-hint" aria-hidden="true">Open project →</span>
+          <span class="card-open-hint" aria-hidden="true">Read more →</span>
           ${github}
         </div>
       </div>
@@ -203,7 +202,7 @@ function repoStatsHtml(data) {
   const languages = Object.entries(data.languages)
     .map(([name, bytes]) => ({ name, share: total ? (bytes / total) * 100 : 0 }))
     .filter(l => l.share >= 0.5);
-  const colour = name => LANGUAGE_COLOURS[name] || "#6b6e76";
+  const colour = name => LANGUAGE_COLOURS[name] || "#8a8a85";
 
   const bar = languages.length
     ? `<div class="lang-bar" aria-hidden="true">${languages.map(l =>
@@ -237,12 +236,11 @@ function fillRepoPanel(panel, repo) {
   loadRepo(repo).then(data => {
     if (!panel.isConnected) return;
     panel.querySelector("[data-repo-stats]").innerHTML = repoStatsHtml(data);
-    panel.querySelector(".live-dot").hidden = false;
   }).catch(err => {
     console.warn("Couldn't load GitHub stats:", err);
     if (!panel.isConnected) return;
     panel.querySelector("[data-repo-stats]").innerHTML =
-      `<p class="repo-desc">Live stats aren't available right now.</p>`;
+      `<p class="repo-desc">Repository details aren't available right now.</p>`;
   });
 }
 
@@ -266,7 +264,7 @@ function indexOfSlug(slug) {
 
 function galleryHtml(project) {
   if (!project.media || !project.media.length) {
-    return `<div class="detail-cover project-cover" aria-hidden="true"><span>${escapeHtml(project.cover || project.title)}</span></div>`;
+    return `<div class="detail-cover project-cover" aria-hidden="true"><span>${escapeHtml(project.title)}</span></div>`;
   }
   const first = project.media[0];
   const thumbs = project.media.length > 1
@@ -316,7 +314,7 @@ function detailHtml(project, index) {
 
   const repoPanel = project.repo
     ? `<div class="panel" data-repo-panel>
-        <p class="panel-title">Repository <span class="live-dot" hidden>● live</span></p>
+        <p class="panel-title">Repository</p>
         <a class="repo-name" href="https://github.com/${project.repo}" target="_blank" rel="noreferrer">${escapeHtml(project.repo)}</a>
         <div data-repo-stats><div class="skeleton"></div><div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:45%"></div></div>
         <div class="panel-links">
@@ -360,7 +358,7 @@ function renderProject(index, direction) {
   const project = PROJECTS[index];
   currentIndex = index;
   viewerContent.innerHTML = detailHtml(project, index);
-  viewerCount.innerHTML = `<strong>${String(index + 1).padStart(2, "0")}</strong> / ${String(PROJECTS.length).padStart(2, "0")}<span class="count-title"> · ${escapeHtml(project.title)}</span>`;
+  viewerCount.innerHTML = `${index + 1} of ${PROJECTS.length}<span class="count-title"> · ${escapeHtml(project.title)}</span>`;
   viewerScroll.scrollTop = 0;
   document.title = `${project.title} | Max Sloam`;
 
@@ -486,7 +484,7 @@ function route() {
 
 window.addEventListener("popstate", route);
 
-// Any link to #/slug opens that project (cards, the terminal, the palette)
+// Any link to #/slug opens that project
 document.addEventListener("click", event => {
   const link = event.target.closest('a[href^="#/"]');
   if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
@@ -567,360 +565,13 @@ viewer.addEventListener("cancel", event => {
   viewerScroll.addEventListener("pointercancel", end);
 })();
 
-/* ---------- Command palette ---------- */
-
-const palette = document.querySelector(".palette");
-const paletteInput = palette.querySelector(".palette-input");
-const paletteList = palette.querySelector(".palette-list");
-let paletteMatches = [];
-let paletteActive = 0;
-
-const SECTIONS = [
-  ["projects", "Projects"],
-  ["experience", "Work Experience"],
-  ["skills", "Technical Skills"],
-  ["education", "Education"],
-  ["about", "Beyond the Code"],
-  ["contact", "Contact"],
-];
-
-const PALETTE_ITEMS = [
-  ...PROJECTS.map((p, i) => ({
-    group: "Projects",
-    text: p.title,
-    hint: p.label,
-    keywords: p.tags.join(" "),
-    run: () => openProject(i),
-  })),
-  ...SECTIONS.map(([id, text]) => ({
-    group: "Go to",
-    text,
-    hint: `#${id}`,
-    run: () => {
-      if (viewer.open) closeViewer({ hash: `#${id}`, animate: false, restoreFocus: false, useBack: false });
-      scrollToSection(id);
-    },
-  })),
-  { group: "Actions", text: "Copy email address", hint: EMAIL, run: () => copyEmail() },
-  { group: "Actions", text: "Send me an email", hint: "mailto", run: () => { location.href = `mailto:${EMAIL}`; } },
-  { group: "Actions", text: "Open my GitHub profile", hint: "github.com/MaxS140M", run: () => window.open("https://github.com/MaxS140M", "_blank", "noreferrer") },
-];
-
-function renderPalette() {
-  const words = paletteInput.value.toLowerCase().split(/\s+/).filter(Boolean);
-  paletteMatches = PALETTE_ITEMS.filter(item => {
-    const haystack = `${item.text} ${item.hint} ${item.keywords || ""} ${item.group}`.toLowerCase();
-    return words.every(w => haystack.includes(w));
-  });
-  paletteActive = Math.min(paletteActive, Math.max(paletteMatches.length - 1, 0));
-
-  if (!paletteMatches.length) {
-    paletteList.innerHTML = `<li class="palette-empty">No matches.</li>`;
-    paletteInput.removeAttribute("aria-activedescendant");
-    return;
-  }
-
-  let html = "";
-  let group = "";
-  paletteMatches.forEach((item, i) => {
-    if (item.group !== group) {
-      group = item.group;
-      html += `<li class="palette-group" role="presentation">${escapeHtml(group)}</li>`;
-    }
-    html += `<li class="palette-item" role="option" id="palette-opt-${i}" data-index="${i}" aria-selected="${i === paletteActive}">
-        <span>${escapeHtml(item.text)}</span><small>${escapeHtml(item.hint)}</small></li>`;
-  });
-  paletteList.innerHTML = html;
-  paletteInput.setAttribute("aria-activedescendant", `palette-opt-${paletteActive}`);
-  const active = paletteList.querySelector('[aria-selected="true"]');
-  if (active) active.scrollIntoView({ block: "nearest" });
-}
-
-function openPalette() {
-  if (palette.open) return;
-  setMenuOpen(false);
-  paletteInput.value = "";
-  paletteActive = 0;
-  renderPalette();
-  palette.showModal();
-  paletteInput.focus();
-}
-
-function runPaletteItem(index) {
-  const item = paletteMatches[index];
-  if (!item) return;
-  palette.close();
-  item.run();
-}
-
-paletteInput.addEventListener("input", () => {
-  paletteActive = 0;
-  renderPalette();
-});
-
-paletteInput.addEventListener("keydown", event => {
-  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-    event.preventDefault();
-    if (!paletteMatches.length) return;
-    const delta = event.key === "ArrowDown" ? 1 : -1;
-    paletteActive = (paletteActive + delta + paletteMatches.length) % paletteMatches.length;
-    renderPalette();
-  } else if (event.key === "Enter") {
-    event.preventDefault();
-    runPaletteItem(paletteActive);
-  }
-});
-
-paletteList.addEventListener("mousemove", event => {
-  const option = event.target.closest(".palette-item");
-  if (!option || Number(option.dataset.index) === paletteActive) return;
-  paletteActive = Number(option.dataset.index);
-  renderPalette();
-});
-
-paletteList.addEventListener("click", event => {
-  const option = event.target.closest(".palette-item");
-  if (option) runPaletteItem(Number(option.dataset.index));
-});
-
-// Clicking the dimmed area outside the box closes it
-palette.addEventListener("click", event => {
-  if (event.target === palette) palette.close();
-});
-
-document.querySelectorAll("[data-open-palette]").forEach(button => {
-  button.addEventListener("click", openPalette);
-});
-
-const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-document.querySelectorAll("[data-shortcut-label]").forEach(el => {
-  el.textContent = isMac ? "⌘ K" : "Ctrl K";
-});
-
-/* ---------- Keyboard shortcuts ---------- */
+/* ---------- Keyboard: arrows move between projects in the viewer ---------- */
 
 document.addEventListener("keydown", event => {
-  if ((event.key === "k" || event.key === "K") && (event.metaKey || event.ctrlKey)) {
-    event.preventDefault();
-    if (palette.open) palette.close();
-    else openPalette();
-    return;
-  }
-  if (palette.open || isTyping(event.target)) return;
-
-  if (event.key === "/") {
-    event.preventDefault();
-    openPalette();
-  } else if (viewer.open && event.key === "ArrowRight") {
-    step(1);
-  } else if (viewer.open && event.key === "ArrowLeft") {
-    step(-1);
-  }
+  if (!viewer.open || isTyping(event.target)) return;
+  if (event.key === "ArrowRight") step(1);
+  else if (event.key === "ArrowLeft") step(-1);
 });
-
-/* ---------- Hero terminal ---------- */
-
-(() => {
-  const body = document.querySelector(".terminal-body");
-  if (!body) return;
-
-  const repoName = p => (p.repo ? p.repo.split("/")[1].toLowerCase() : p.slug);
-  const lines = [
-    { cmd: "whoami" },
-    { out: "max sloam · computer science @ university of nottingham" },
-    { cmd: "./build/book_replay full_day.itch" },
-    { out: "28.7M messages · 8,850 stocks · 28M msg/s" },
-    { cmd: "ctest && pytest" },
-    { ok: "✓ 134 tests passed (91 C++, 43 Python)" },
-    { cmd: "ls ~/projects" },
-    { projects: true },
-  ];
-
-  const prompt = () => {
-    const span = document.createElement("span");
-    span.className = "t-prompt";
-    span.textContent = "$ ";
-    return span;
-  };
-
-  const cursor = document.createElement("span");
-  cursor.className = "t-cursor";
-
-  function outputLine(line) {
-    const div = document.createElement("div");
-    if (line.projects) {
-      PROJECTS.forEach((p, i) => {
-        const a = document.createElement("a");
-        a.href = `#/${p.slug}`;
-        a.textContent = repoName(p);
-        a.tabIndex = -1; // the project cards are the accessible way in
-        div.append(a, i < PROJECTS.length - 1 ? "  " : "");
-      });
-    } else {
-      div.className = line.ok ? "t-ok" : "t-out";
-      div.textContent = line.ok || line.out;
-    }
-    return div;
-  }
-
-  function finish() {
-    const last = document.createElement("div");
-    last.append(prompt(), cursor);
-    body.append(last);
-  }
-
-  if (reducedMotion) {
-    lines.forEach(line => {
-      if (line.cmd) {
-        const div = document.createElement("div");
-        div.append(prompt(), line.cmd);
-        body.append(div);
-      } else {
-        body.append(outputLine(line));
-      }
-    });
-    finish();
-    return;
-  }
-
-  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-  async function play() {
-    await wait(400);
-    for (const line of lines) {
-      if (line.cmd) {
-        const div = document.createElement("div");
-        const text = document.createTextNode("");
-        div.append(prompt(), text, cursor);
-        body.append(div);
-        await wait(350);
-        for (const char of line.cmd) {
-          text.data += char;
-          await wait(28 + Math.random() * 45);
-        }
-        await wait(260);
-        cursor.remove();
-      } else {
-        body.append(outputLine(line));
-        await wait(320);
-      }
-    }
-    finish();
-  }
-
-  play();
-})();
-
-/* ---------- Hero order-book depth chart ---------- */
-
-(() => {
-  const canvas = document.querySelector(".hero-depth");
-  if (!canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext("2d");
-  const styles = getComputedStyle(document.documentElement);
-  const bidColour = styles.getPropertyValue("--bid").trim() || "#3ecf8e";
-  const askColour = styles.getPropertyValue("--ask").trim() || "#ff6b5b";
-
-  const LEVELS = 36;
-  const size = () => 0.4 + Math.random() * 1.6;
-  const book = {
-    bids: Array.from({ length: LEVELS }, size),
-    asks: Array.from({ length: LEVELS }, size),
-  };
-  const target = { bids: book.bids.slice(), asks: book.asks.slice() };
-  let width = 0;
-  let height = 0;
-  let running = false;
-  let lastFrame = 0;
-  let lastShuffle = 0;
-
-  function resize() {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    width = canvas.clientWidth;
-    height = canvas.clientHeight;
-    canvas.width = Math.round(width * ratio);
-    canvas.height = Math.round(height * ratio);
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    draw(performance.now());
-  }
-
-  function side(sizes, mid, stepX, direction, colour, maxDepth) {
-    let depth = 0;
-    ctx.beginPath();
-    ctx.moveTo(mid, height);
-    for (let i = 0; i < sizes.length; i++) {
-      const x = mid + direction * i * stepX;
-      depth += sizes[i];
-      const y = height - (depth / maxDepth) * height * 0.92;
-      ctx.lineTo(x, y);
-      ctx.lineTo(x + direction * stepX, y);
-    }
-    ctx.lineTo(mid + direction * sizes.length * stepX, height);
-    ctx.closePath();
-    ctx.globalAlpha = 0.12;
-    ctx.fillStyle = colour;
-    ctx.fill();
-    ctx.globalAlpha = 0.6;
-    ctx.strokeStyle = colour;
-    ctx.lineWidth = 1.25;
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-  }
-
-  function draw(time) {
-    if (!width || !height) return;
-    ctx.clearRect(0, 0, width, height);
-    const mid = width / 2 + Math.sin(time / 9000) * width * 0.04;
-    const gap = 6;
-    const stepX = (width / 2 + width * 0.05) / LEVELS;
-    const sum = list => list.reduce((a, b) => a + b, 0);
-    const maxDepth = Math.max(sum(book.bids), sum(book.asks)) * 1.05;
-    side(book.bids, mid - gap, stepX, -1, bidColour, maxDepth);
-    side(book.asks, mid + gap, stepX, 1, askColour, maxDepth);
-  }
-
-  function frame(time) {
-    if (!running) return;
-    requestAnimationFrame(frame);
-    if (time - lastFrame < 33) return; // ~30 fps is plenty for this
-    lastFrame = time;
-
-    if (time - lastShuffle > 600) {
-      lastShuffle = time;
-      // Orders arrive and cancel: nudge a few random levels on each side
-      ["bids", "asks"].forEach(key => {
-        for (let n = 0; n < 6; n++) {
-          const i = Math.floor(Math.random() * LEVELS);
-          target[key][i] = Math.max(0.15, target[key][i] + (Math.random() - 0.5) * 1.4);
-        }
-      });
-    }
-    ["bids", "asks"].forEach(key => {
-      for (let i = 0; i < LEVELS; i++) book[key][i] += (target[key][i] - book[key][i]) * 0.08;
-    });
-    draw(time);
-  }
-
-  function setRunning(on) {
-    if (reducedMotion || on === running) return;
-    running = on;
-    if (on) requestAnimationFrame(frame);
-  }
-
-  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
-  else window.addEventListener("resize", resize);
-  resize();
-
-  let heroVisible = true;
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(([entry]) => {
-      heroVisible = entry.isIntersecting;
-      setRunning(heroVisible && !document.hidden);
-    }).observe(canvas);
-  }
-  document.addEventListener("visibilitychange", () => setRunning(heroVisible && !document.hidden));
-  setRunning(true);
-})();
 
 /* ---------- Open a project linked directly (#/slug) ---------- */
 

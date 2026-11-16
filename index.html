@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Max Sloam | Portfolio</title>
   <meta name="description" content="Portfolio of Max Sloam, Computer Science student at the University of Nottingham building low-latency C++ systems, quant research tools and AI applications." />
-  <meta name="theme-color" content="#0b0c0e" />
+  <meta name="theme-color" content="#fbfbfa" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Max Sloam | Portfolio" />
@@ -14,10 +14,10 @@
   <meta property="og:image" content="https://maxs140m.github.io/images/LobOrderBook.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffb224'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%230b0c0e'%3EMS%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a1a19'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23ffffff'%3EMS%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -26,7 +26,7 @@
 
   <header class="header">
     <nav class="nav container">
-      <a href="#home" class="logo"><span class="logo-prompt">~/</span>max-sloam<span class="logo-cursor" aria-hidden="true"></span></a>
+      <a href="#home" class="logo">Max Sloam</a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -35,59 +35,36 @@
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
-        <button type="button" class="palette-trigger" data-open-palette aria-label="Search the site">
-          <span>Search</span><kbd data-shortcut-label>Ctrl K</kbd>
-        </button>
-        <a href="#contact" class="btn btn-small">Contact</a>
+        <a href="#contact">Contact</a>
       </div>
     </nav>
   </header>
 
   <main id="home">
-    <section class="hero">
-      <canvas class="hero-depth" aria-hidden="true"></canvas>
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="eyebrow">Computer Science · University of Nottingham</p>
-          <h1>Hi, I’m Max Sloam.</h1>
-          <p class="lead">
-            I build fast, carefully tested software: a C++ order book engine that replays NASDAQ market data at
-            28M messages a second, retrieval-augmented AI assistants, and full-stack apps.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn">View Projects</a>
-            <button type="button" data-copy-email class="btn btn-secondary">Copy Email</button>
-            <a href="https://github.com/MaxS140M" class="btn btn-secondary" target="_blank" rel="noreferrer">GitHub ↗</a>
-          </div>
-          <ul class="quick-info">
-            <li>London / Nottingham, UK</li>
-            <li><a href="mailto:maxsloam.work@gmail.com">maxsloam.work@gmail.com</a></li>
-          </ul>
-        </div>
-
-        <div class="terminal" role="img" aria-label="Terminal showing the LOB engine replaying a trading day at 28 million messages per second and 134 tests passing">
-          <div class="terminal-bar" aria-hidden="true">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="terminal-title">max@nottingham: ~/lob-research-platform</span>
-          </div>
-          <pre class="terminal-body" aria-hidden="true"></pre>
-        </div>
+    <section class="hero container">
+      <p class="eyebrow">Computer Science · University of Nottingham</p>
+      <h1>Max Sloam</h1>
+      <p class="lead">
+        I’m a computer science student at Nottingham, mostly interested in markets and systems. My main projects are
+        a C++ engine that rebuilds NASDAQ’s order book from raw exchange messages, and a futures trend-following
+        system.
+      </p>
+      <div class="hero-actions">
+        <a href="mailto:maxsloam.work@gmail.com" class="btn">Email me</a>
+        <a href="https://github.com/MaxS140M" class="btn btn-secondary" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
+      <ul class="quick-info">
+        <li>London / Nottingham, UK</li>
+        <li><a href="mailto:maxsloam.work@gmail.com">maxsloam.work@gmail.com</a></li>
+      </ul>
     </section>
 
     <section id="projects" class="section container">
-      <div class="section-head">
-        <h2><span class="section-index">01</span>Projects</h2>
-        <p class="section-intro">
-          Open any project for the full write-up and live repo stats.
-          <span class="hint-keys">Use <kbd>←</kbd> <kbd>→</kbd> to move between projects.</span>
-          <span class="hint-touch">Swipe to move between projects.</span>
-        </p>
-      </div>
+      <h2>Projects</h2>
 
       <div class="featured-list" data-featured></div>
 
-      <h3 class="subheading">More projects</h3>
+      <h3 class="subheading">Other projects</h3>
       <div class="grid project-grid" data-grid></div>
 
       <noscript>
@@ -97,11 +74,11 @@
     </section>
 
     <section id="experience" class="section container">
-      <h2><span class="section-index">02</span>Work Experience</h2>
+      <h2>Work Experience</h2>
       <div class="timeline">
         <div class="card timeline-item reveal">
           <h3>Sales Assistant / Administrator — Winkworth Estate Agency</h3>
-          <p class="muted mono">March 2022 – September 2025</p>
+          <p class="date">March 2022 – September 2025</p>
           <p>
             Provided a high level of customer service and helped support the smooth running of the office.
             Managed property keys, ensuring safe handling, accurate logging, and reliable communication.
@@ -110,7 +87,7 @@
 
         <div class="card timeline-item reveal">
           <h3>IT Support Work Placement — Storm IT</h3>
-          <p class="muted mono">July 2023 – August 2023</p>
+          <p class="date">July 2023 – August 2023</p>
           <p>
             Completed cybersecurity-related tasks and gained a stronger understanding of how websites and digital systems
             support modern businesses.
@@ -120,7 +97,7 @@
     </section>
 
     <section id="skills" class="section container">
-      <h2><span class="section-index">03</span>Technical Skills</h2>
+      <h2>Technical Skills</h2>
       <div class="grid skills-grid">
         <div class="card skill-card reveal">
           <h3>Languages</h3>
@@ -146,27 +123,27 @@
     </section>
 
     <section id="education" class="section container">
-      <h2><span class="section-index">04</span>Education</h2>
+      <h2>Education</h2>
       <div class="grid two-col">
         <div class="card reveal">
           <h3>University of Nottingham</h3>
-          <p class="muted mono">September 2024 – Present</p>
+          <p class="date">September 2024 – Present</p>
           <p>Computer Science BSc (Hons)</p>
         </div>
         <div class="card reveal">
           <h3>Yavneh College</h3>
-          <p class="muted mono">Completed June 2024</p>
+          <p class="date">Completed June 2024</p>
           <p>A-Levels: Computer Science, Mathematics, Economics</p>
         </div>
       </div>
     </section>
 
     <section id="about" class="section container">
-      <h2><span class="section-index">05</span>Beyond the Code</h2>
+      <h2>Outside of Computing</h2>
       <div class="grid two-col">
         <div class="card reveal">
           <h3>Mentoring — Yavneh College</h3>
-          <p class="muted mono">September 2022 – April 2024</p>
+          <p class="date">September 2022 – April 2024</p>
           <p>
             Mentored two younger students through issues involving anxiety and bullying, strengthening my
             communication, empathy and problem-solving skills.
@@ -174,7 +151,7 @@
         </div>
         <div class="card reveal">
           <h3>Piano</h3>
-          <p class="muted mono">Self-taught</p>
+          <p class="date">Self-taught</p>
           <p>
             I enjoy learning challenging classical pieces and creating my own music, building creativity through
             consistent practice.
@@ -184,11 +161,12 @@
     </section>
 
     <section id="contact" class="section container">
-      <div class="card contact-card reveal">
-        <h2>Get in touch</h2>
-        <p>If you’d like to talk about opportunities, projects or collaborations, I’d love to hear from you.</p>
+      <div class="contact-card reveal">
+        <h2>Contact</h2>
+        <p>Email is the best way to reach me. I’m happy to talk about roles, projects or anything on this page.</p>
         <div class="contact-links">
-          <a class="btn" href="mailto:maxsloam.work@gmail.com">Email Me</a>
+          <a class="btn" href="mailto:maxsloam.work@gmail.com">Email me</a>
+          <button type="button" data-copy-email class="btn btn-secondary">Copy email</button>
           <a class="btn btn-secondary" href="https://github.com/MaxS140M" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
       </div>
@@ -198,14 +176,14 @@
   <footer class="footer">
     <div class="container footer-inner">
       <p>© 2026 Max Sloam</p>
-      <p class="mono">Hand-written HTML, CSS and JS · press <kbd>/</kbd> to search</p>
+      <p><a href="https://github.com/MaxS140M" target="_blank" rel="noreferrer">GitHub</a> · <a href="mailto:maxsloam.work@gmail.com">Email</a></p>
     </div>
   </footer>
 
   <!-- Full-screen project page -->
   <dialog class="viewer" aria-labelledby="viewer-title">
     <div class="viewer-bar">
-      <span class="viewer-count mono" aria-live="polite"></span>
+      <span class="viewer-count" aria-live="polite"></span>
       <div class="viewer-controls">
         <button type="button" class="icon-btn" data-viewer-prev aria-label="Previous project">←</button>
         <button type="button" class="icon-btn" data-viewer-next aria-label="Next project">→</button>
@@ -214,23 +192,6 @@
     </div>
     <div class="viewer-scroll">
       <article class="viewer-content"></article>
-    </div>
-    <p class="viewer-hint mono" aria-hidden="true">
-      <span class="hint-keys"><kbd>←</kbd> <kbd>→</kbd> browse · <kbd>Esc</kbd> close</span>
-      <span class="hint-touch">Swipe to browse</span>
-    </p>
-  </dialog>
-
-  <!-- Command palette -->
-  <dialog class="palette" aria-label="Search the site">
-    <div class="palette-box">
-      <div class="palette-input-row">
-        <span class="palette-prompt mono" aria-hidden="true">&gt;</span>
-        <input type="text" class="palette-input" placeholder="Jump to a project or section…" autocomplete="off" spellcheck="false"
-          role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" />
-      </div>
-      <ul class="palette-list" id="palette-list" role="listbox"></ul>
-      <p class="palette-foot mono"><kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
     </div>
   </dialog>
 

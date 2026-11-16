@@ -3,13 +3,13 @@
 //
 // Fields:
 //   slug          used in the URL (#/slug)
-//   featured      shown as a large card at the top
+//   featured      shown as a large card at the top (keep this to the best one or two)
 //   summary       short text for the card
 //   metrics       headline numbers, shown on the project page (and featured cards)
 //   sections      the write-up on the project page; body is HTML
 //   media         images, first one is the card thumbnail. fit: "contain" shows the whole
-//                 image (for charts) on a background colour instead of cropping it
-//   cover         text tile used instead of an image
+//                 image (for charts) on a background colour instead of cropping it.
+//                 With no media, the card shows a plain tile with the title
 //   architecture  pipeline diagram: a list of stages, each a list of nodes
 //   repo          "owner/name" on GitHub, used for the live repo panel
 //   links         extra buttons on the project page
@@ -178,7 +178,6 @@ const PROJECTS = [
     slug: "uk-renting-rag",
     title: "UK Renting Guidance Assistant",
     label: "AI · RAG",
-    featured: true,
     summary:
       "A question-answering assistant for renting in England that answers only from official GOV.UK guidance, cites its sources, and says so when the guidance doesn't cover a question.",
     metrics: [
@@ -228,7 +227,6 @@ const PROJECTS = [
     slug: "nuh-tickets",
     title: "AI Ticket Tokenisation",
     label: "AI · Group project",
-    featured: true,
     summary:
       "Automates routine service desk requests for an NHS trust while flagging higher-priority issues for human support. I built the backend chatbot.",
     metrics: [
@@ -378,7 +376,6 @@ const PROJECTS = [
       },
     ],
     tags: ["JavaScript", "Supabase", "Playwright"],
-    cover: "<car-retailer />",
   },
 
   {
@@ -400,7 +397,6 @@ const PROJECTS = [
       },
     ],
     tags: ["C", "Concurrency"],
-    cover: "$ ./os-sim --round-robin",
     repo: "MaxS140M/Operating-System-Simulator",
   },
 ];
